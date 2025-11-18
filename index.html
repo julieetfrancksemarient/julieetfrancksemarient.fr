@@ -2,282 +2,588 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Julie & Franck — Mariage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mariage – Julie Derobert & Franck Marion</title>
+  <meta name="description" content="Mariage de Julie Derobert & Franck Marion — date, lieu, RSVP, infos pratiques et hébergements." />
+  <meta name="color-scheme" content="light" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mariage – Julie & Franck">
+  <meta property="og:description" content="Toutes les infos : cérémonie, vin d'honneur, RSVP, accès, hébergements et photos.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="img/chateau.jpg">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Arapey:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+
   <style>
- :root {
-  --bg: #ffffff;
-  --accent: #111111;
-  --muted: #666666;
+    :root{
+      /* Palette demandée */
+      --bg:#FFEADC;                 /* Fond dominant */
+      --panel:#ffffff;
+      --fg:#463a37;
+      --muted:#7c6f6b;
+      --border:#f1ddd3;
 
-  --radius: 10px;
-  --max-width: 900px;
+      --primary:#E67527;            /* Couleur texte/accent */
+      --primary-strong:#c9621f;     /* Variante foncée */
 
-  --font-stack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-}
+      --shadow: 0 10px 25px rgba(0,0,0,.06);
+      --shadow-soft: 0 6px 16px rgba(0,0,0,.05);
+    }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;padding:0;background:var(--bg);color:var(--fg);
+      font:16px/1.6 "Arapey", Georgia, serif; letter-spacing:.02em;
+    }
+    html{scroll-behavior:smooth}
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:auto;padding:0 20px}
 
-body {
-  background: var(--bg);
-  color: var(--accent);
-  font-family: var(--font-stack);
-  line-height: 1.5;
-}
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(1.1) blur(8px);
+      background:rgba(255,234,220,.92);
+      border-bottom:1px solid var(--border);
+      transition:box-shadow .25s ease, background-color .25s ease;
+    }
+    header.scrolled{box-shadow:0 6px 18px rgba(0,0,0,.06);background:rgba(255,234,220,.97)}
+    nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+    .brand{font: 36px/1 "Great Vibes", cursive; color:var(--primary); white-space:nowrap}
+    .nav-links{display:flex;gap:18px;align-items:center}
+    .nav-links a{padding:.3rem .1rem;font-weight:700;letter-spacing:.03em}
+    .hamb{display:none;border:0;background:transparent;font-size:28px;line-height:1;cursor:pointer}
+    .hamb[aria-expanded="true"]{transform:rotate(90deg)}
+    @media (max-width:860px){
+      .hamb{display:block}
+      .nav-links{
+        position:absolute;left:0;right:0;top:60px;display:none;flex-direction:column;
+        gap:12px;padding:12px 20px;background:rgba(255,234,220,.98);
+        border-bottom:1px solid var(--border);
+      }
+      .nav-open .nav-links{display:flex}
+    }
 
-/* HEADER */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 24px;
-  border-bottom: 1px solid #eee;
-  background: var(--bg);
-}
+    /* Boutons */
+    .btn{
+      position:relative;display:inline-block;padding:.8rem 1.1rem;border-radius:999px;
+      border:1px solid var(--border);font-weight:700;background:var(--panel);
+      transition:transform .25s ease, box-shadow .25s ease, background-color .25s ease, border-color .25s ease;
+      will-change:transform;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-soft)}
+    .btn-primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .btn-primary:hover{background:var(--primary-strong)}
 
-header h1 {
-  font-size: 20px;
-  font-weight: 600;
-}
+    .card{
+      border:1px solid var(--border);border-radius:18px;padding:18px;background:var(--panel);
+      box-shadow:var(--shadow);backdrop-filter:saturate(1.05);
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.08)}
 
-nav a {
-  margin-left: 16px;
-  text-decoration: none;
-  color: var(--accent);
-  font-weight: 500;
-}
+    /* HERO (lisibilité conservée) */
+    .hero{
+      position:relative;overflow:hidden;min-height:58vh;display:flex;align-items:center;justify-content:center;text-align:center;
+      background: url("img/chateau.jpg") center/cover no-repeat;
+      color:#fff;
+    }
+    .hero::before{
+      content:"";position:absolute;inset:0;z-index:0;
+      background:
+        radial-gradient(60% 50% at 50% 38%, rgba(0,0,0,.28) 0%, rgba(0,0,0,.14) 60%, transparent 100%),
+        linear-gradient(to bottom, rgba(0,0,0,.35) 0%, rgba(0,0,0,.20) 35%, rgba(255,234,220,.88) 100%);
+    }
+    .hero-inner{position:relative;z-index:1;padding:86px 0 36px}
 
-nav a:hover {
-  opacity: 0.6;
-}
+    .title-plaque{
+      display:inline-block;max-width:min(95vw,900px);
+      background:rgba(0,0,0,.16);
+      border:1px solid rgba(255,255,255,.28);
+      backdrop-filter: blur(8px);
+      padding:18px 22px;border-radius:18px;
+      box-shadow: 0 14px 30px rgba(0,0,0,.22), inset 0 0 6px rgba(255,255,255,.04);
+    }
+    .sub{
+      display:inline-block;margin-bottom:10px;padding:.2rem .6rem;border-radius:999px;
+      font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;
+      color:#fff;background:rgba(230,117,39,.28);border:1px solid rgba(230,117,39,.45);
+      box-shadow:0 1px 6px rgba(0,0,0,.15);
+    }
+    .names{
+      font: clamp(42px, 6.8vw, 88px) / 1.05 "Great Vibes", cursive;
+      margin:6px 0 0 0; color:var(--primary);
+      text-shadow: 0 10px 22px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.45);
+      -webkit-text-stroke: .3px rgba(0,0,0,.20);
+    }
+    .event-lines{
+      display:inline-block;margin-top:12px;padding:.55rem .85rem;border-radius:12px;
+      background: rgba(0,0,0,.18);
+      color:#fff; backdrop-filter: blur(3px);
+      text-shadow: 0 2px 6px rgba(0,0,0,.5);
+      border:1px solid rgba(255,255,255,.22);
+    }
+    .event-lines .line + .line{
+      margin-top:.35rem;padding-top:.35rem;border-top:1px solid rgba(255,255,255,.18);
+    }
 
-/* HERO */
-.hero {
-  padding: 60px 20px;
-  text-align: center;
-}
+    /* Countdown */
+    .countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:540px;margin:22px auto 8px}
+    .box{border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center;background:rgba(255,255,255,.95);box-shadow:0 8px 22px rgba(0,0,0,.10)}
+    .num{font-variant-numeric:tabular-nums;letter-spacing:.02em;font-size:1.7rem;font-weight:700;color:#2b221f}
+    .lbl{font-size:.78rem;color:#6d5d59;margin-top:4px}
+    .after-count{margin-top:10px;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
+    .venue{font-weight:700;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.6)}
 
-.hero small {
-  display: block;
-  font-size: 14px;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
+    section{padding:56px 0}
+    .section-title{text-align:center;margin-bottom:16px}
+    #rsvp .container-narrow{max-width:900px;margin:0 auto}
 
-.hero h2 {
-  font-size: 32px;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
+    .grid{display:grid;gap:16px}
+    @media (min-width:900px){ .grid-3{grid-template-columns:repeat(3,1fr)} .grid-2{grid-template-columns:repeat(2,1fr)} }
 
-.countdown {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin: 24px 0;
-}
+    /* Slider */
+    .slider-zone{position:relative}
+    .slider-wrap{overflow:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding:0}
+    .slider{display:flex;gap:16px;padding-bottom:6px;justify-content:center}
+    .slide{flex:0 0 auto;width:min(95vw,1100px);aspect-ratio:21/9;border-radius:18px;overflow:hidden;border:1px solid var(--border);background:var(--panel);box-shadow:var(--shadow);scroll-snap-align:center}
+    .slide img{width:100%;height:100%;object-fit:cover}
+    .slider-nav{position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:space-between;padding:0 10px}
+    .nav-btn{pointer-events:auto;border:0;border-radius:999px;width:44px;height:44px;font-size:20px;font-weight:700;background:var(--primary);color:#fff;box-shadow:var(--shadow-soft);display:grid;place-items:center;cursor:pointer;transition:transform .15s ease}
+    .nav-btn:hover{transform:translateY(-1px)}
+    .nav-btn:disabled{opacity:.35;cursor:not-allowed}
 
-.countdown .cell {
-  text-align: center;
-}
+    footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;color:var(--muted);
+      background:linear-gradient(to bottom, rgba(230,117,39,.08), transparent 35%)}
 
-.countdown .cell div:first-child {
-  font-size: 30px;
-  font-weight: bold;
-}
+    input,textarea,select{width:100%;padding:.7rem .85rem;border:1px solid var(--border);border-radius:12px;background:transparent;color:inherit;transition:border-color .2s ease, box-shadow .2s ease}
+    input:focus,textarea:focus,select:focus{outline:none;border-color:color-mix(in oklab, var(--primary) 35%, white);box-shadow:0 0 0 4px color-mix(in oklab, var(--primary) 18%, white)}
+    label{font-size:.92rem;color:var(--muted);display:block;margin:6px 0 2px}
 
-.countdown .cell div:last-child {
-  font-size: 12px;
-  color: var(--muted);
-}
+    /* Hébergements */
+    .stay{display:flex; gap:14px; align-items:center;}
+    .stay-thumb{
+      flex:0 0 64px; width:64px; height:64px; border-radius:12px; overflow:hidden;
+      border:1px solid var(--border); box-shadow:var(--shadow-soft); background:#f8f6f5;
+    }
+    .stay-thumb img{width:100%;height:100%;object-fit:cover}
+    .stay-body{flex:1 1 auto}
+    .stay-body small{color:var(--muted)}
 
-/* SECTIONS */
-.section {
-  max-width: var(--max-width);
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.section h3 {
-  font-size: 22px;
-  margin-bottom: 12px;
-  border-left: 4px solid var(--accent);
-  padding-left: 10px;
-}
-
-.section p {
-  margin: 10px 0;
-}
-
-/* RSVP */
-.rsvp .btn {
-  display: inline-block;
-  background: var(--accent);
-  color: white;
-  padding: 12px 18px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  font-weight: 500;
-  margin-top: 10px;
-}
-
-.rsvp .btn:hover {
-  opacity: 0.85;
-}
-
-/* GALLERY */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 14px;
-  margin-top: 20px;
-}
-
-.gallery img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: var(--radius);
-}
-
-/* HÉBERGEMENT */
-.hotels {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-}
-
-.hotel {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-  background: #fafafa;
-  padding: 12px;
-  border-radius: var(--radius);
-  border: 1px solid #eee;
-}
-
-.hotel img {
-  width: 90px;
-  height: 70px;
-  object-fit: cover;
-  border-radius: var(--radius);
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 30px 0;
-  color: var(--muted);
-  margin-top: 40px;
-}
-
-/* MOBILE */
-@media (max-width: 520px) {
-  .countdown {
-    flex-wrap: wrap;
-  }
-  header nav {
-    display: none;
-  }
-}
+    /* RSVP – layout 2 colonnes propre */
+    .rsvp-card{ padding:28px; border-radius:18px; background:var(--panel); border:1px solid var(--border); box-shadow:var(--shadow); }
+    .rsvp-grid{ display:grid; gap:24px; align-items:center; }
+    @media (min-width:900px){ .rsvp-grid{ grid-template-columns: 1.3fr .9fr; } }
+    .rsvp-list{ margin:0; padding:0; list-style:none; line-height:1.9; color:var(--fg); }
+    .rsvp-list li::before{ content:"•"; margin-right:.6rem; color:var(--primary); }
+    .rsvp-cta{ text-align:center; }
+    .rsvp-cta .btn{ font-size:1rem; padding:1rem 1.4rem; }
+    .rsvp-help{ margin-top:.75rem; color:var(--muted); font-size:.9rem; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Julie &amp; Franck</h1>
+
+<header id="siteHeader">
+  <div class="container">
     <nav>
-      <a href="#rsvp">RSVP</a>
-      <a href="#infos">Infos pratiques</a>
-      <a href="#photos">Photos</a>
-      <a href="#hebergement">Hébergement</a>
+      <div class="brand">Julie & Franck</div>
+      <button class="hamb" aria-label="Ouvrir le menu" aria-expanded="false" id="hamb">☰</button>
+      <div class="nav-links" id="links">
+        <a href="#rsvp">RSVP</a>
+        <a href="#infos">Infos pratiques</a>
+        <a href="#photos">Photos</a>
+        <a href="#hebergement">Hébergement</a>
+      </div>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main>
-    <section class="hero">
-      <div style="font-size:14px;color:var(--muted);">NOUS NOUS MARIONS</div>
-      <h2>Julie Derobert &amp; Franck Marion</h2>
-
-      <div class="countdown" aria-hidden="true">
-        <div class="cell"><div style="font-size:28px">00</div><div style="font-size:12px;color:var(--muted)">Jours</div></div>
-        <div class="cell"><div style="font-size:28px">00</div><div style="font-size:12px;color:var(--muted)">Heures</div></div>
-        <div class="cell"><div style="font-size:28px">00</div><div style="font-size:12px;color:var(--muted)">Minutes</div></div>
-        <div class="cell"><div style="font-size:28px">00</div><div style="font-size:12px;color:var(--muted)">Sec.</div></div>
+<main>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="title-plaque">
+        <div class="sub">NOUS NOUS MARIONS</div>
+        <h1 class="names">Julie Derobert &amp; Franck Marion</h1>
+        <div class="event-lines" id="eventLines"></div>
       </div>
 
-      <div style="color:var(--muted)">au Château de la Reynerie — <a href="#infos">M’y rendre</a></div>
-    </section>
-
-    <section id="rsvp" class="section rsvp">
-      <h3>RSVP</h3>
-      <p>Merci de confirmer avant le 15 mars</p>
-      <p>Merci de préciser dans votre mail :</p>
-      <ul>
-        <li>Nom et prénom</li>
-        <li>Nombre d’adultes et d’enfants</li>
-        <li>Allergies ou régimes particuliers</li>
-        <li>Message (optionnel)</li>
-      </ul>
-      <!-- Replace the mailto with the real address -->
-      <p><a class="btn" href="mailto:julie+franck@example.com?subject=RSVP">Envoyer un mail</a></p>
-      <p style="color:var(--muted)">Si le bouton ne fonctionne pas : envoyez un mail à l'adresse ci-dessus.</p>
-    </section>
-
-    <section id="infos" class="section">
-      <h3>Infos pratiques</h3>
-      <p><strong>Cérémonie – 14h30</strong><br>Église Notre-Dame d’Arlanc<br><a href="https://www.google.com/maps/dir/?api=1&destination=Eglise+Notre-Dame+d'Arlanc" target="_blank" rel="noopener">Itinéraire église</a></p>
-
-      <p><strong>Vin d’honneur – 16h30</strong><br>Château de la Reynerie<br>63580 Le Vernet-Chaméane<br><a href="https://www.google.com/maps/dir/?api=1&destination=Ch%C3%A2teau+de+la+Reynerie" target="_blank" rel="noopener">Itinéraire château</a></p>
-
-      <p><strong>Contacts</strong><br>✉️ — Merci de privilégier les SMS.</p>
-    </section>
-
-    <section id="photos" class="section">
-      <h3>Photos</h3>
-      <p>Quelques images d’ambiance</p>
-      <div class="gallery">
-        <img alt="Cérémonie en extérieur" src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1600">
-        <img alt="Bouquet lumière dorée" src="https://images.pexels.com/photos/265920/pexels-photo-265920.jpeg?auto=compress&cs=tinysrgb&w=1600">
-        <img alt="Alliances et détails" src="https://images.pexels.com/photos/265947/pexels-photo-265947.jpeg?auto=compress&cs=tinysrgb&w=1600">
-        <img alt="Vin d'honneur" src="https://images.pexels.com/photos/265920/pexels-photo-265920.jpeg?auto=compress&cs=tinysrgb&w=1600">
-        <img alt="Préparatifs mariée" src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1600">
-        <img alt="Sortie des mariés" src="https://images.pexels.com/photos/265947/pexels-photo-265947.jpeg?auto=compress&cs=tinysrgb&w=1600">
-      </div>
-    </section>
-
-    <section id="hebergement" class="section">
-      <h3>Hébergement</h3>
-      <div class="hotels">
-        <div class="hotel"><img alt="Hôtel du Parc" src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1600"><div><strong>Hôtel du Parc</strong><br>8 min en voiture • Parking<br><a href="https://www.google.com/maps" target="_blank" rel="noopener">Voir</a></div></div>
-
-        <div class="hotel"><img alt="Auberge des Fleurs" src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1600"><div><strong>Auberge des Fleurs</strong><br>12 min • Chambres familiales<br><a href="https://www.google.com/maps" target="_blank" rel="noopener">Voir</a></div></div>
-
-        <div class="hotel"><img alt="B&B Centre" src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1600"><div><strong>B&amp;B Centre</strong><br>18 min • Pratique gare<br><a href="https://www.google.com/maps" target="_blank" rel="noopener">Voir</a></div></div>
-
-        <div class="hotel"><img alt="La Closerie" src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1600"><div><strong>La Closerie</strong><br>6 km • Parking<br><a href="https://www.google.com/maps" target="_blank" rel="noopener">Voir</a></div></div>
-
-        <div class="hotel"><img alt="Gîte du Verger" src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1600"><div><strong>Gîte du Verger</strong><br>10 min • 4–6 pers • Parking<br><a href="https://www.google.com/maps" target="_blank" rel="noopener">Voir</a></div></div>
-
-        <div class="hotel"><img alt="Hôtel des Remparts" src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1600"><div><strong>Hôtel des Remparts</strong><br>14 min • Centre-ville<br><a href="https://www.google.com/maps" target="_blank" rel="noopener">Voir</a></div></div>
-
+      <!-- COUNTDOWN -->
+      <div class="countdown" id="countdown" hidden>
+        <div class="box"><div class="num" id="d">00</div><div class="lbl">Jours</div></div>
+        <div class="box"><div class="num" id="h">00</div><div class="lbl">Heures</div></div>
+        <div class="box"><div class="num" id="m">00</div><div class="lbl">Minutes</div></div>
+        <div class="box"><div class="num" id="s">00</div><div class="lbl">Sec.</div></div>
       </div>
 
-      <p style="margin-top:16px;color:var(--muted)">Château de la Reynerie • 63580 Le Vernet-Chaméane</p>
-    </section>
-  </main>
+      <div class="after-count">
+        <span class="venue">au Château de la Reynerie</span>
+        <a class="btn btn-primary" id="mapsBtn" target="_blank" rel="noreferrer">M’y rendre</a>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    © Julie &amp; Franck
-  </footer>
+  <!-- RSVP (mailto avec instructions, 2 colonnes) -->
+  <section id="rsvp">
+    <div class="container container-narrow">
+      <div class="section-title">
+        <h2 style="font-family:'Great Vibes',cursive;font-size:42px;color:var(--primary);margin:0 0 6px">RSVP</h2>
+        <div class="small" style="color:var(--muted)">Merci de confirmer avant le 15 mars</div>
+      </div>
 
-  <script>
-    // Small JS for smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t) t.scrollIntoView({behavior:'smooth'});}));
-  </script>
+      <div class="rsvp-card">
+        <div class="rsvp-grid">
+          <div>
+            <p style="margin:0 0 .6rem; color:var(--fg); text-align:left;">Merci de préciser dans votre mail :</p>
+            <ul class="rsvp-list">
+              <li>Nom et prénom</li>
+              <li>Nombre d’adultes et d’enfants</li>
+              <li>Allergies ou régimes particuliers</li>
+              <li>Message (optionnel)</li>
+            </ul>
+          </div>
+
+          <div class="rsvp-cta">
+            <a id="mailtoRSVP" class="btn btn-primary" href="#">Envoyer un mail</a>
+            <div class="rsvp-help">
+              Si le bouton ne fonctionne pas : <a id="mailtoFallback"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOS PRATIQUES -->
+  <section id="infos">
+    <div class="container">
+      <div class="section-title">
+        <h2 style="font-family:'Great Vibes',cursive;font-size:42px;color:var(--primary);margin:0 0 6px">Infos pratiques</h2>
+      </div>
+      <div class="grid grid-3">
+        <div class="card">
+          <strong style="color:var(--primary)">Cérémonie – 14h30</strong>
+          <p style="margin:.4rem 0 .6rem"><em>Église Notre-Dame d’Arlanc</em></p>
+          <a class="btn" id="mapsChurch" target="_blank" rel="noreferrer">Itinéraire église</a>
+        </div>
+        <div class="card">
+          <strong style="color:var(--primary)">Vin d’honneur – 16h30</strong>
+          <p style="margin:.4rem 0 .6rem"><em>Château de la Reynerie</em><br><small id="venueAddr">63580 Le Vernet-Chaméane</small></p>
+          <a class="btn" id="mapsBtn2" target="_blank" rel="noreferrer">Itinéraire château</a>
+        </div>
+        <div class="card">
+          <strong style="color:var(--primary)">Contacts</strong>
+          <p>
+            📞 <span id="phone1"></span><br>
+            📞 <span id="phone2"></span><br>
+            ✉️ <a id="emailTxt"></a>
+          </p>
+          <small class="muted">Merci de privilégier les SMS.</small>
+          <!-- Adresse postale privée (non affichée par défaut)
+          <p style="margin-top:.6rem"><small>79 avenue de l’Europe – 92400 Courbevoie</small></p>
+          -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTOS -->
+  <section id="photos">
+    <div class="container">
+      <div class="section-title">
+        <h2 style="font-family:'Great Vibes',cursive;font-size:42px;color:var(--primary);margin:0 0 6px">Photos</h2>
+        <div class="small" style="color:var(--muted)">Quelques images d’ambiance</div>
+      </div>
+    </div>
+
+    <div class="slider-zone">
+      <div class="slider-wrap" id="sliderWrap">
+        <div class="slider" id="slider">
+          <div class="slide"><img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Cérémonie en extérieur"></div>
+          <div class="slide"><img src="https://images.pexels.com/photos/265920/pexels-photo-265920.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Bouquet lumière dorée"></div>
+          <div class="slide"><img src="https://images.pexels.com/photos/265947/pexels-photo-265947.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Alliances et détails"></div>
+          <div class="slide"><img src="https://images.pexels.com/photos/341372/pexels-photo-341372.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Vin d'honneur"></div>
+          <div class="slide"><img src="https://images.pexels.com/photos/265940/pexels-photo-265940.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Préparatifs mariée"></div>
+          <div class="slide"><img src="https://www.crolles.fr/wp-content/uploads/2022/02/Mariage.jpeg" alt="Sortie des mariés"></div>
+        </div>
+      </div>
+
+      <div class="slider-nav">
+        <button class="nav-btn" id="prev" aria-label="Précédent">‹</button>
+        <button class="nav-btn" id="next" aria-label="Suivant">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HÉBERGEMENT -->
+  <section id="hebergement">
+    <div class="container">
+      <div class="section-title">
+        <h2 style="font-family:'Great Vibes',cursive;font-size:42px;color:var(--primary);margin:0 0 6px">Hébergement</h2>
+      </div>
+
+      <div class="grid grid-3">
+        <!-- 1 -->
+        <div class="card">
+          <div class="stay">
+            <div class="stay-thumb"><img src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=300" alt=""></div>
+            <div class="stay-body">
+              <strong>Hôtel du Parc</strong><br>
+              <small>8&nbsp;min en voiture • Parking</small>
+            </div>
+          </div>
+          <a class="btn" style="margin-top:12px" href="https://maps.google.com/?q=H%C3%B4tel+du+Parc" target="_blank" rel="noreferrer">Voir</a>
+        </div>
+        <!-- 2 -->
+        <div class="card">
+          <div class="stay">
+            <div class="stay-thumb"><img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=300" alt=""></div>
+            <div class="stay-body">
+              <strong>Auberge des Fleurs</strong><br>
+              <small>12&nbsp;min • Chambres familiales</small>
+            </div>
+          </div>
+          <a class="btn" style="margin-top:12px" href="https://maps.google.com/?q=Auberge+des+Fleurs" target="_blank" rel="noreferrer">Voir</a>
+        </div>
+        <!-- 3 -->
+        <div class="card">
+          <div class="stay">
+            <div class="stay-thumb"><img src="https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=300" alt=""></div>
+            <div class="stay-body">
+              <strong>B&amp;B Centre</strong><br>
+              <small>18&nbsp;min • Pratique gare</small>
+            </div>
+          </div>
+          <a class="btn" style="margin-top:12px" href="https://maps.google.com/?q=B%26B+Centre" target="_blank" rel="noreferrer">Voir</a>
+        </div>
+        <!-- 4 -->
+        <div class="card">
+          <div class="stay">
+            <div class="stay-thumb"><img src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=300" alt=""></div>
+            <div class="stay-body">
+              <strong>La Closerie</strong><br>
+              <small>6&nbsp;km • Parking</small>
+            </div>
+          </div>
+          <a class="btn" style="margin-top:12px" href="https://maps.google.com/?q=La+Closerie" target="_blank" rel="noreferrer">Voir</a>
+        </div>
+        <!-- 5 -->
+        <div class="card">
+          <div class="stay">
+            <div class="stay-thumb"><img src="https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=300" alt=""></div>
+            <div class="stay-body">
+              <strong>Gîte du Verger</strong><br>
+              <small>10&nbsp;min • 4–6 pers • Parking</small>
+            </div>
+          </div>
+          <a class="btn" style="margin-top:12px" href="https://maps.google.com/?q=G%C3%AEte+du+Verger" target="_blank" rel="noreferrer">Voir</a>
+        </div>
+        <!-- 6 -->
+        <div class="card">
+          <div class="stay">
+            <div class="stay-thumb"><img src="https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?auto=compress&cs=tinysrgb&w=300" alt=""></div>
+            <div class="stay-body">
+              <strong>Hôtel des Remparts</strong><br>
+              <small>14&nbsp;min • Centre-ville</small>
+            </div>
+          </div>
+          <a class="btn" style="margin-top:12px" href="https://maps.google.com/?q=H%C3%B4tel+des+Remparts" target="_blank" rel="noreferrer">Voir</a>
+        </div>
+        <!-- 7 -->
+        <div class="card">
+          <div class="stay">
+            <div class="stay-thumb"><img src="https://images.pexels.com/photos/271647/pexels-photo-271647.jpeg?auto=compress&cs=tinysrgb&w=300" alt=""></div>
+            <div class="stay-body">
+              <strong>Maison d'Hôtes Les Tilleuls</strong><br>
+              <small>9&nbsp;min • Parking</small>
+            </div>
+          </div>
+          <a class="btn" style="margin-top:12px" href="https://maps.google.com/?q=Maison+d%27H%C3%B4tes+Les+Tilleuls" target="_blank" rel="noreferrer">Voir</a>
+        </div>
+        <!-- 8 -->
+        <div class="card">
+          <div class="stay">
+            <div class="stay-thumb"><img src="https://images.pexels.com/photos/96444/pexels-photo-96444.jpeg?auto=compress&cs=tinysrgb&w=300" alt=""></div>
+            <div class="stay-body">
+              <strong>Le Relais du Château</strong><br>
+              <small>7&nbsp;min • Parking</small>
+            </div>
+          </div>
+          <a class="btn" style="margin-top:12px" href="https://maps.google.com/?q=Le+Relais+du+Ch%C3%A2teau" target="_blank" rel="noreferrer">Voir</a>
+        </div>
+        <!-- 9 -->
+        <div class="card">
+          <div class="stay">
+            <div class="stay-thumb"><img src="https://images.pexels.com/photos/4061976/pexels-photo-4061976.jpeg?auto=compress&cs=tinysrgb&w=300" alt=""></div>
+            <div class="stay-body">
+              <strong>Apart-Hôtel La Prairie</strong><br>
+              <small>15&nbsp;min • Studios 2–4</small>
+            </div>
+          </div>
+          <a class="btn" style="margin-top:12px" href="https://maps.google.com/?q=Apart+H%C3%B4tel+La+Prairie" target="_blank" rel="noreferrer">Voir</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container" id="footerTxt">Château de la Reynerie • 63580 Le Vernet-Chaméane</div>
+</footer>
+
+<script>
+  // ===== CONFIG =====
+  const CONFIG = {
+    couple: { bride: "Julie Derobert", groom: "Franck Marion" },
+    dateISO: "2026-08-01T14:30:00+02:00", // Samedi 1er août 2026 – 14h30
+    locations: {
+      church: {
+        name: "Église Notre-Dame d’Arlanc",
+        time: "14:30",
+        mapsUrl: "https://maps.google.com/?q=%C3%89glise%20Notre%20Dame%20d%27Arlanc"
+      },
+      venue: {
+        name: "Château de la Reynerie",
+        time: "16:30",
+        address: "63580 Le Vernet-Chaméane",
+        mapsUrl: "https://maps.google.com/?q=Ch%C3%A2teau%20de%20la%20Reynerie%2063580%20Le%20Vernet-Cham%C3%A9ane"
+      }
+    },
+    contact: {
+      phones: ["+33 6 13 75 47 27", "+33 6 51 44 84 71"],
+      email: "contact@mariage-exemple.fr" // <-- remplace ici par l'adresse officielle
+    },
+    rsvp: { to: "contact@mariage-exemple.fr", subject: "RSVP – Mariage Julie & Franck" } // <-- et ici si besoin
+  };
+
+  // Header + burger
+  const header = document.getElementById("siteHeader");
+  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 4);
+  window.addEventListener("scroll", onScroll); onScroll();
+
+  const hamb = document.getElementById("hamb");
+  const links = document.getElementById("links");
+  hamb?.addEventListener("click",()=>{
+    const open = document.body.classList.toggle("nav-open");
+    hamb.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  links?.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
+    document.body.classList.remove("nav-open");
+    hamb.setAttribute("aria-expanded","false");
+  }));
+
+  // Text inject (HERO)
+  const dateObj = new Date(CONFIG.dateISO);
+  const dateLong = dateObj.toLocaleDateString("fr-FR",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+  const lines = document.getElementById("eventLines");
+  lines.innerHTML = `
+    <div class="line"><strong>Date :</strong> ${dateLong}</div>
+    <div class="line"><strong>Cérémonie :</strong> ${CONFIG.locations.church.time} – ${CONFIG.locations.church.name}</div>
+    <div class="line"><strong>Vin d’honneur :</strong> ${CONFIG.locations.venue.time} – ${CONFIG.locations.venue.name}</div>
+    <div class="line"><strong>Adresse :</strong> ${CONFIG.locations.venue.address}</div>
+  `;
+  document.getElementById("venueAddr").textContent = CONFIG.locations.venue.address;
+  document.getElementById("mapsBtn").href = CONFIG.locations.venue.mapsUrl;
+  document.getElementById("mapsBtn2").href = CONFIG.locations.venue.mapsUrl;
+  document.getElementById("mapsChurch").href = CONFIG.locations.church.mapsUrl;
+
+  // Contacts
+  document.getElementById("phone1").textContent = CONFIG.contact.phones[0] || "";
+  document.getElementById("phone2").textContent = CONFIG.contact.phones[1] || "";
+  const emailTxt = document.getElementById("emailTxt");
+  if (CONFIG.contact.email && emailTxt){
+    emailTxt.textContent = CONFIG.contact.email;
+    emailTxt.href = `mailto:${CONFIG.contact.email}`;
+  } else if (emailTxt) {
+    emailTxt.closest("p").removeChild(emailTxt);
+  }
+
+  // Footer
+  document.getElementById("footerTxt").textContent =
+    `${CONFIG.locations.venue.name} • ${CONFIG.locations.venue.address}`;
+
+  // ===== Countdown =====
+  function parseDateISO(iso) {
+    const d = new Date(iso);
+    if (!isNaN(d)) return d;
+    const m = iso.match(/^(\d{4})-(\d{2})-(\d{2})[T\s](\d{2}):(\d{2})(?::(\d{2}))?([+-]\d{2}:\d{2}|Z)?$/);
+    if (!m) return new Date();
+    const [ , Y, M, D, h, min, s = "00", tz = "Z"] = m;
+    const base = Date.UTC(+Y, +M - 1, +D, +h, +min, +s);
+    if (tz === "Z" || !tz) return new Date(base);
+    const sign = tz.startsWith("-") ? -1 : 1;
+    const [th, tm] = tz.slice(1).split(":").map(Number);
+    const offsetMs = sign * (th * 60 + tm) * 60 * 1000;
+    return new Date(base - offsetMs);
+  }
+  const elCount = document.getElementById("countdown");
+  const d = document.getElementById("d");
+  const h = document.getElementById("h");
+  const m = document.getElementById("m");
+  const s = document.getElementById("s");
+  const TARGET = parseDateISO(CONFIG.dateISO);
+  function two(n){ return String(n).padStart(2,"0"); }
+  function tick() {
+    const now = Date.now();
+    const total = TARGET.getTime() - now;
+    elCount.hidden = false;
+    if (total <= 0) { d.textContent = h.textContent = m.textContent = s.textContent = "00"; return; }
+    const days = Math.floor(total / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+    const mins  = Math.floor((total / (1000 * 60)) % 60);
+    const secs  = Math.floor((total / 1000) % 60);
+    d.textContent = two(days); h.textContent = two(hours); m.textContent = two(mins); s.textContent = two(secs);
+  }
+  tick(); const timer = setInterval(tick, 1000);
+
+  // RSVP (mailto avec contenu pré-rempli)
+  const mailBtn = document.getElementById("mailtoRSVP");
+  const mailFallback = document.getElementById("mailtoFallback");
+  const subject = encodeURIComponent(CONFIG.rsvp.subject);
+  const body = encodeURIComponent(
+    "Merci d’indiquer :\n" +
+    "- Nom et prénom\n" +
+    "- Nombre d’adultes et d’enfants\n" +
+    "- Allergies ou régimes particuliers\n" +
+    "- Message (optionnel)"
+  );
+  const mailHref = `mailto:${CONFIG.rsvp.to}?subject=${subject}&body=${body}`;
+  mailBtn.href = mailHref;
+  if (mailFallback){ mailFallback.textContent = CONFIG.rsvp.to; mailFallback.href = `mailto:${CONFIG.rsvp.to}`; }
+
+  // Slider (flèches + drag + snap)
+  const wrap = document.getElementById('sliderWrap');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  function step(){ return wrap.clientWidth; }
+  function updateButtons(){
+    prev.disabled = wrap.scrollLeft <= 0;
+    const max = wrap.scrollWidth - wrap.clientWidth - 1;
+    next.disabled = wrap.scrollLeft >= max;
+  }
+  prev.addEventListener('click', ()=>{ wrap.scrollBy({left:-step(), behavior:'smooth'}); setTimeout(updateButtons, 300); });
+  next.addEventListener('click', ()=>{ wrap.scrollBy({left: step(), behavior:'smooth'}); setTimeout(updateButtons, 300); });
+  wrap.addEventListener('scroll', updateButtons);
+  window.addEventListener('resize', updateButtons);
+  updateButtons();
+  let isDown=false, startX=0, startLeft=0;
+  const start = (x)=>{ isDown=true; startX=x; startLeft=wrap.scrollLeft; wrap.style.scrollSnapType='none'; };
+  const move = (x)=>{ if(!isDown) return; wrap.scrollLeft = startLeft - (x-startX); };
+  const end = ()=>{ 
+    if(!isDown) return; isDown=false;
+    const w = step(); const target = Math.round(wrap.scrollLeft / w) * w;
+    wrap.style.scrollSnapType='x mandatory';
+    wrap.scrollTo({left: target, behavior:'smooth'}); setTimeout(updateButtons, 300);
+  };
+  wrap.addEventListener('mousedown', e=>start(e.clientX));
+  window.addEventListener('mousemove', e=>move(e.clientX));
+  window.addEventListener('mouseup', end);
+  wrap.addEventListener('touchstart', e=>start(e.touches[0].clientX),{passive:true});
+  wrap.addEventListener('touchmove', e=>move(e.touches[0].clientX),{passive:true});
+  wrap.addEventListener('touchend', end);
+</script>
 </body>
 </html>
