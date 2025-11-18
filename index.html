@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Julie & Franck — Mariage</title>
+  <style>
+    :root{--bg:#fff;--accent:#111;--muted:#666;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--accent);font-family:var(--font-family)}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid #eee}
+    header h1{margin:0;font-size:18px}
+    nav a{margin-left:12px;text-decoration:none;color:var(--accent)}
+    .hero{padding:48px 24px;text-align:center}
+    .hero h2{margin:.2rem 0;font-size:28px}
+    .countdown{display:flex;gap:18px;justify-content:center;margin:20px 0}
+    .countdown .cell{text-align:center}
+    .section{max-width:900px;margin:28px auto;padding:0 18px}
+    .section h3{margin-top:0}
+    .rsvp .btn{display:inline-block;padding:10px 14px;border-radius:6px;background:#111;color:#fff;text-decoration:none}
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .gallery img{width:100%;height:180px;object-fit:cover;border-radius:8px}
+    .hotels{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .hotel{display:flex;gap:12px;align-items:center}
+    .hotel img{width:88px;height:64px;object-fit:cover;border-radius:6px}
+    footer{padding:30px;text-align:center;color:var(--muted)}
+    @media (max-width:520px){.countdown{flex-wrap:wrap}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Julie &amp; Franck</h1>
+    <nav>
+      <a href="#rsvp">RSVP</a>
+      <a href="#infos">Infos pratiques</a>
+      <a href="#photos">Photos</a>
+      <a href="#hebergement">Hébergement</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div style="font-size:14px;color:var(--muted);">NOUS NOUS MARIONS</div>
+      <h2>Julie Derobert &amp; Franck Marion</h2>
+
+      <div class="countdown" aria-hidden="true">
+        <div class="cell"><div style="font-size:28px">00</div><div style="font-size:12px;color:var(--muted)">Jours</div></div>
+        <div class="cell"><div style="font-size:28px">00</div><div style="font-size:12px;color:var(--muted)">Heures</div></div>
+        <div class="cell"><div style="font-size:28px">00</div><div style="font-size:12px;color:var(--muted)">Minutes</div></div>
+        <div class="cell"><div style="font-size:28px">00</div><div style="font-size:12px;color:var(--muted)">Sec.</div></div>
+      </div>
+
+      <div style="color:var(--muted)">au Château de la Reynerie — <a href="#infos">M’y rendre</a></div>
+    </section>
+
+    <section id="rsvp" class="section rsvp">
+      <h3>RSVP</h3>
+      <p>Merci de confirmer avant le 15 mars</p>
+      <p>Merci de préciser dans votre mail :</p>
+      <ul>
+        <li>Nom et prénom</li>
+        <li>Nombre d’adultes et d’enfants</li>
+        <li>Allergies ou régimes particuliers</li>
+        <li>Message (optionnel)</li>
+      </ul>
+      <!-- Replace the mailto with the real address -->
+      <p><a class="btn" href="mailto:julie+franck@example.com?subject=RSVP">Envoyer un mail</a></p>
+      <p style="color:var(--muted)">Si le bouton ne fonctionne pas : envoyez un mail à l'adresse ci-dessus.</p>
+    </section>
+
+    <section id="infos" class="section">
+      <h3>Infos pratiques</h3>
+      <p><strong>Cérémonie – 14h30</strong><br>Église Notre-Dame d’Arlanc<br><a href="https://www.google.com/maps/dir/?api=1&destination=Eglise+Notre-Dame+d'Arlanc" target="_blank" rel="noopener">Itinéraire église</a></p>
+
+      <p><strong>Vin d’honneur – 16h30</strong><br>Château de la Reynerie<br>63580 Le Vernet-Chaméane<br><a href="https://www.google.com/maps/dir/?api=1&destination=Ch%C3%A2teau+de+la+Reynerie" target="_blank" rel="noopener">Itinéraire château</a></p>
+
+      <p><strong>Contacts</strong><br>✉️ — Merci de privilégier les SMS.</p>
+    </section>
+
+    <section id="photos" class="section">
+      <h3>Photos</h3>
+      <p>Quelques images d’ambiance</p>
+      <div class="gallery">
+        <img alt="Cérémonie en extérieur" src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1600">
+        <img alt="Bouquet lumière dorée" src="https://images.pexels.com/photos/265920/pexels-photo-265920.jpeg?auto=compress&cs=tinysrgb&w=1600">
+        <img alt="Alliances et détails" src="https://images.pexels.com/photos/265947/pexels-photo-265947.jpeg?auto=compress&cs=tinysrgb&w=1600">
+        <img alt="Vin d'honneur" src="https://images.pexels.com/photos/265920/pexels-photo-265920.jpeg?auto=compress&cs=tinysrgb&w=1600">
+        <img alt="Préparatifs mariée" src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1600">
+        <img alt="Sortie des mariés" src="https://images.pexels.com/photos/265947/pexels-photo-265947.jpeg?auto=compress&cs=tinysrgb&w=1600">
+      </div>
+    </section>
+
+    <section id="hebergement" class="section">
+      <h3>Hébergement</h3>
+      <div class="hotels">
+        <div class="hotel"><img alt="Hôtel du Parc" src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1600"><div><strong>Hôtel du Parc</strong><br>8 min en voiture • Parking<br><a href="https://www.google.com/maps" target="_blank" rel="noopener">Voir</a></div></div>
+
+        <div class="hotel"><img alt="Auberge des Fleurs" src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1600"><div><strong>Auberge des Fleurs</strong><br>12 min • Chambres familiales<br><a href="https://www.google.com/maps" target="_blank" rel="noopener">Voir</a></div></div>
+
+        <div class="hotel"><img alt="B&B Centre" src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1600"><div><strong>B&amp;B Centre</strong><br>18 min • Pratique gare<br><a href="https://www.google.com/maps" target="_blank" rel="noopener">Voir</a></div></div>
+
+        <div class="hotel"><img alt="La Closerie" src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1600"><div><strong>La Closerie</strong><br>6 km • Parking<br><a href="https://www.google.com/maps" target="_blank" rel="noopener">Voir</a></div></div>
+
+        <div class="hotel"><img alt="Gîte du Verger" src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1600"><div><strong>Gîte du Verger</strong><br>10 min • 4–6 pers • Parking<br><a href="https://www.google.com/maps" target="_blank" rel="noopener">Voir</a></div></div>
+
+        <div class="hotel"><img alt="Hôtel des Remparts" src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=1600"><div><strong>Hôtel des Remparts</strong><br>14 min • Centre-ville<br><a href="https://www.google.com/maps" target="_blank" rel="noopener">Voir</a></div></div>
+
+      </div>
+
+      <p style="margin-top:16px;color:var(--muted)">Château de la Reynerie • 63580 Le Vernet-Chaméane</p>
+    </section>
+  </main>
+
+  <footer>
+    © Julie &amp; Franck
+  </footer>
+
+  <script>
+    // Small JS for smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t) t.scrollIntoView({behavior:'smooth'});}));
+  </script>
+</body>
+</html>
