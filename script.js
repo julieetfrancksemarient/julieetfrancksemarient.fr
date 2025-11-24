@@ -16,7 +16,7 @@ const CONFIG = {
     }
   },
   contact: {
-    phones: ["+33 6 13 75 47 27", "+33 6 51 44 84 71"],
+    phones: ["+33 6 13 75 47 27", "+33 6 51 44 84 71", "+33 6 01 19 42 66", "+33 6 24 60 81 17", "+33 6 35 78 22 45", "+33 6 10 73 85 33"],
     email: "julieetfrancksemarient@gmail.com"
   },
   rsvp: { to: "parentalexis62@gmail.com", subject: "RSVP – Mariage Julie & Franck" }
@@ -68,6 +68,10 @@ links?.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
   if (phone1El) phone1El.textContent = CONFIG.contact.phones[0] || "";
   const phone2El = document.getElementById("phone2");
   if (phone2El) phone2El.textContent = CONFIG.contact.phones[1] || "";
+  const phone3El = document.getElementById("phone3");
+  if (phone3El) phone3El.textContent = CONFIG.contact.phones[2] || "";
+  const phone4El = document.getElementById("phone4");
+  if (phone4El) phone4El.textContent = CONFIG.contact.phones[3] || "";
   const emailTxt = document.getElementById("emailTxt");
   if (emailTxt && CONFIG.contact.email) {
     emailTxt.textContent = CONFIG.contact.email;
