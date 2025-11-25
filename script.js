@@ -474,24 +474,22 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// --- Toggle image box (infos pratiques) ---
-document.addEventListener("DOMContentLoaded", function () {
-  const btn = document.getElementById("toggleImageBtn");
-  const box = document.getElementById("toggleImageBox");
+// --- Bouton + / - qui affiche une petite image ---
+(function () {
+  const btn = document.getElementById("togglePhotoBtn");
+  const box = document.getElementById("photoBox");
 
-  if (btn && box) {
-    btn.addEventListener("click", () => {
-      const isVisible = box.style.display === "block";
+  if (!btn || !box) return;
 
-      if (isVisible) {
-        // Cacher la box
-        box.style.display = "none";
-        btn.textContent = "+ Voir la photo";
-      } else {
-        // Afficher la box
-        box.style.display = "block";
-        btn.textContent = "- Masquer la photo";
-      }
-    });
-  }
-});
+  btn.addEventListener("click", () => {
+    const isHidden = box.classList.contains("hidden");
+
+    if (isHidden) {
+      box.classList.remove("hidden");
+      btn.textContent = "−";
+    } else {
+      box.classList.add("hidden");
+      btn.textContent = "+";
+    }
+  });
+})();
