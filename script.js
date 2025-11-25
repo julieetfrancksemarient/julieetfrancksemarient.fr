@@ -349,8 +349,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputAge = document.createElement("input");
     inputAge.type = "number";
     inputAge.name = "child_guest_age[]";
-    inputAge.placeholder = "Âge";
+    inputAge.placeholder = "Âge le jour du mariage";
     inputAge.style.flex = "1";
+    inputAge.max = 17;
 
     div.appendChild(inputName);
     div.appendChild(inputAge);
