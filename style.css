@@ -127,7 +127,7 @@ section{padding:56px 0}
 .grid{display:grid;gap:16px}
 @media (min-width:900px){ .grid-3{grid-template-columns:repeat(3,1fr)} .grid-2{grid-template-columns:repeat(2,1fr)} 
 /* Ligne avec 1 seule carte mais largeur identique à une cellule de grid-2 */
-  .grid-4 {grid-template-columns: 1fr;width: calc((100% - 16px) / 2);margin: 0 auto}}
+  .grid-4 {grid-template-columns: 1fr;width: calc((100% - 16px) / 2);margin: 16px auto 0;}}
 
 /* Slider */
 .slider-zone{position:relative}
