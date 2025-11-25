@@ -246,24 +246,68 @@ document.addEventListener("DOMContentLoaded", function () {
   const wrapper = document.getElementById("adultGuestsWrapper");
   const addBtn = document.getElementById("addAdultGuestBtn");
 
-  if (!wrapper || !addBtn) return; // Sécurité si la page ne contient pas la section
+  if (!wrapper || !addBtn) return;
 
-  let count = 1;   // 1 champ déjà dans le HTML
-  const max = 6;   // 1 existant + 5 nouveaux
+  let count = 1;      // 1 champ déjà présent
+  const max = 6;      // 1 existant + 5 nouveaux
 
   addBtn.addEventListener("click", function () {
     if (count >= max) return;
-
     count++;
 
+    // Crée le conteneur du champ
     const div = document.createElement("div");
     div.className = "adult-guest-field";
-    div.innerHTML = `
-      <input type="text" name="adult_guest[]" placeholder="Prénom & nom">
-    `;
+    div.style.position = "relative";
+    div.style.marginTop = "6px";
+
+    // Input
+    const input = document.createElement("input");
+    input.type = "text";
+    input.name = "adult_guest[]";
+    input.placeholder = "Prénom & nom";
+    input.style.paddingRight = "28px"; // espace pour le bouton supprimer
+    div.appendChild(input);
+
+    // Bouton supprimer
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.textContent = "✕";
+    removeBtn.style.position = "absolute";
+    removeBtn.style.right = "4px";
+    removeBtn.style.top = "50%";
+    removeBtn.style.transform = "translateY(-50%)";
+    removeBtn.style.background = "red";
+    removeBtn.style.color = "white";
+    removeBtn.style.border = "none";
+    removeBtn.style.borderRadius = "50%";
+    removeBtn.style.width = "22px";
+    removeBtn.style.height = "22px";
+    removeBtn.style.cursor = "pointer";
+    removeBtn.style.display = "none"; // invisible par défaut
+    removeBtn.style.fontSize = "14px";
+    removeBtn.style.lineHeight = "18px";
+    removeBtn.style.padding = "0";
+
+    div.appendChild(removeBtn);
+
+    // Affiche le bouton supprimer au survol
+    div.addEventListener("mouseenter", () => removeBtn.style.display = "block");
+    div.addEventListener("mouseleave", () => removeBtn.style.display = "none");
+
+    // Supprimer le champ
+    removeBtn.addEventListener("click", () => {
+      wrapper.removeChild(div);
+      count--;
+      if (count < max) {
+        addBtn.disabled = false;
+        addBtn.textContent = "+ Ajouter un adulte";
+      }
+    });
 
     wrapper.appendChild(div);
 
+    // Désactive le bouton ajouter si max atteint
     if (count >= max) {
       addBtn.disabled = true;
       addBtn.textContent = "Limite atteinte";
