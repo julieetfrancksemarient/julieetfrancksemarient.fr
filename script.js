@@ -22,7 +22,7 @@ const CONFIG = {
     phones: ["+33 6 13 75 47 27", "+33 6 51 44 84 71", "+33 6 01 19 42 66", "+33 6 24 60 81 17", "+33 6 35 78 22 45", "+33 6 10 73 85 33"],
     email: "julieetfrancksemarient@gmail.com"
   },
-  rsvp: { to: "parentalexis62@gmail.com", subject: "RSVP – Mariage Julie & Franck" }
+  rsvp: { to: "julieetfrancksemarient@gmail.com", subject: "RSVP – Mariage Julie & Franck" }
 };
 
 // Header + burger
