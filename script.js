@@ -332,16 +332,28 @@ document.addEventListener("DOMContentLoaded", function () {
     // Crée le conteneur du champ
     const div = document.createElement("div");
     div.className = "child-guest-field";
+    div.style.display = "flex";
+    div.style.gap = "8px";
+    div.style.alignItems = "center";
     div.style.position = "relative";
     div.style.marginTop = "6px";
 
-    // Input
-    const input = document.createElement("input");
-    input.type = "text";
-    input.name = "child_guest[]";
-    input.placeholder = "Prénom & nom";
-    input.style.paddingRight = "28px"; // espace pour bouton supprimer
-    div.appendChild(input);
+    // Input Prénom & nom
+    const inputName = document.createElement("input");
+    inputName.type = "text";
+    inputName.name = "child_guest_name[]";
+    inputName.placeholder = "Prénom & nom";
+    inputName.style.flex = "2";
+
+    // Input Âge
+    const inputAge = document.createElement("input");
+    inputAge.type = "number";
+    inputAge.name = "child_guest_age[]";
+    inputAge.placeholder = "Âge";
+    inputAge.style.flex = "1";
+
+    div.appendChild(inputName);
+    div.appendChild(inputAge);
 
     // Bouton supprimer
     const removeBtn = document.createElement("button");
