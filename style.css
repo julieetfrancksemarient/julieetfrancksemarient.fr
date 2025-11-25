@@ -171,3 +171,6 @@ label{font-size:.92rem;color:var(--muted);display:block;margin:6px 0 2px}
 .rsvp-cta{ text-align:center; }
 .rsvp-cta .btn{ font-size:1rem; padding:1rem 1.4rem; }
 .rsvp-help{ margin-top:.75rem; color:var(--muted); font-size:.9rem; }
+
+/* Justification des textes infos pratiques */
+#infospratiques p {text-align: justify;}
