@@ -128,16 +128,15 @@
   </section>
   
   <!-- Bloc image toggle -->
-  <div id="photoToggleWrapper" style="margin-top:20px;">
-  <button type="button" id="toggleImageBtn" class="btn btn-primary" style="display:inline-block;">
-    + Voir la photo
+ <div class="toggle-photo-wrapper">
+  <button type="button" id="togglePhotoBtn" class="btn btn-primary">
+    +
   </button>
-  
-  <div id="toggleImageBox" 
-       style="display:none; margin-top:15px; padding:15px; border:2px solid var(--primary); border-radius:12px;">
-    <img src="ImageMeteo.png" alt="Meteo" style="max-width:100%; border-radius:8px;">
+
+  <div id="photoBox" class="photo-box hidden">
+    <img src="ImageMeteo.png" alt="Meteo" class="photo-small">
   </div>
-  </div>
+</div>
         
   <!-- PHOTOS (moved here from index.html) -->
   <section id="photos">
