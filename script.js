@@ -466,3 +466,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// --- Toggle image box (infos pratiques) ---
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.getElementById("toggleImageBtn");
+  const box = document.getElementById("toggleImageBox");
+
+  if (btn && box) {
+    btn.addEventListener("click", () => {
+      const isVisible = box.style.display === "block";
+
+      if (isVisible) {
+        // Cacher la box
+        box.style.display = "none";
+        btn.textContent = "+ Voir la photo";
+      } else {
+        // Afficher la box
+        box.style.display = "block";
+        btn.textContent = "- Masquer la photo";
+      }
+    });
+  }
+});
