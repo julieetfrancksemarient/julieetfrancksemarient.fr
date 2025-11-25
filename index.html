@@ -124,16 +124,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               + Ajouter un adulte
            </button>
           
-         <!-- Invités enfants -->
-          <div id="childGuestsWrapper">
-            <label>Répondez-vous pour un invité enfant ?</label>
-          
-            <div class="child-guest-field">
-              <input type="text" name="child_guest[]" placeholder="Prénom & nom">
-            </div>
-          </div>
+        <!-- Invités enfants -->
+            <div id="childGuestsWrapper">
+              <label>Répondez-vous pour un invité enfant ?</label>
             
-            <button type="button" id="addChildGuestBtn" class="btn btn-primary" style="display:inline-block; margin-top:12px;">
+              <div class="child-guest-field" style="display:flex; gap:8px; align-items:center; margin-top:6px;">
+                <input type="text" name="child_guest_name[]" placeholder="Prénom & nom" style="flex:2;">
+                <input type="number" name="child_guest_age[]" placeholder="Âge" style="flex:1;">
+              </div>
+            </div>
+            
+            <button type="button" id="addChildGuestBtn" class="btn btn-primary btn-left" style="margin-top:12px;">
               + Ajouter un enfant
             </button>
 
