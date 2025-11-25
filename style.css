@@ -149,7 +149,6 @@ label{font-size:.92rem;color:var(--muted);display:block;margin:6px 0 2px}
 /* Tous les labels du formulaire RSVP */
 #rsvp label {font-size: .92rem;   /* conserve la taille existante */
   color: black;        /* texte noir */
-  font-weight: 300;    /* un peu plus gras */
   display: block;
   margin: 6px 0 2px}
 
