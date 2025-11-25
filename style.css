@@ -193,19 +193,47 @@ label{font-size:.92rem;color:var(--muted);display:block;margin:6px 0 2px}
   #infospratiques p {text-align: justify;}
   #contacts small {text-align: justify;}
   
-  .toggle-photo-wrapper {text-align: center;margin: 20px 0;}
-  
-  .photo-box {
-    margin-top: 14px;
-    padding: 12px;
-    border: 2px solid var(--primary);
-    border-radius: 12px;
-    display: inline-block;}
-  
-  .photo-box.hidden {display: none;}
-  
-  .photo-small {
-    max-width: 180px;           /* taille de la photo (tu peux réduire si tu veux encore plus petit) */
-    height: auto;
-    display: block;
-    margin: 0 auto;}
+ /* Conteneur du bouton et de l'image */
+.toggle-photo-wrapper {
+  text-align: center;
+  margin: 20px 0;
+  position: relative; /* permet de positionner le bouton au-dessus */
+}
+
+/* Bouton + / − */
+#togglePhotoBtn {
+  position: absolute; /* fixe le bouton au même endroit */
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); /* centre horizontalement */
+  z-index: 2; /* reste au-dessus de l'image */
+  padding: 8px 16px;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary);
+  color: white;
+}
+
+/* Boîte de l'image */
+.photo-box {
+  margin-top: 50px; /* espace pour que l'image n'empiète pas sur le bouton */
+  padding: 12px;
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  display: inline-block;
+}
+
+/* Masquer la boîte */
+.photo-box.hidden {
+  display: none;
+}
+
+/* Image à l'intérieur */
+.photo-small {
+  max-width: 600px; 
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
