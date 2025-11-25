@@ -117,6 +117,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <input type="text" id="name" name="name" required placeholder="Prénom &amp; nom">
           </div>
 
+          <!-- Autres invités adultes -->
+          <div id="adultGuestsWrapper">
+            <label>Répondez-vous pour un autre invité adulte ?</label>
+          
+            <div class="adult-guest-field">
+              <input type="text" name="adult_guest[]" placeholder="Prénom & nom">
+            </div>
+          </div>
+          
+          <button type="button" id="addAdultGuestBtn" class="btn btn-secondary" style="margin-top:8px;">
+            + Ajouter un adulte
+          </button>
+          
           <!-- Invités enfant -->
           <div>
             <label for="name">Répondez vous pour un invité enfant ?</label>
