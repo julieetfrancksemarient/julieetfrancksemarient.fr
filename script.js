@@ -235,22 +235,25 @@ function parseDateISO(iso) {
       // Construction du FormData pour Web3Forms
       const formData = new FormData(form);
 
-      // Supprimer les champs bruts
+     // Champs dynamiques : adultes
+      const adultInputs = form.querySelectorAll('input[name="adult_guest[]"]');
+      const adults = Array.from(adultInputs).map(i => i.value.trim()).filter(v => v);
+      formData.set('adultes_supplementaires', adults.length ? adults.join(", ") : "Aucun");
+
+      // Champs dynamiques : enfants
+      const children = [];
+      childNames.forEach((input, idx) => {
+        const name = input.value.trim();
+        const age = childAges[idx].value.trim();
+        if (name) children.push(age ? `${name} (${age} ans)` : name);
+      });
+      formData.set('enfants', children.length ? children.join(", ") : "Aucun");
+
+      // SUPPRESSION DES CHAMPS BRUTS QUI POLLUENT L’EMAIL
       formData.delete('adult_guest[]');
       formData.delete('child_guest_name[]');
       formData.delete('child_guest_age[]');
-      
-      // Réordonner pour que adultes/enfants apparaissent juste avant "diet"
-      const dietValue = formData.get('diet');  // on stocke la valeur de diet
-      formData.delete('diet');                 // on retire diet pour la réinsérer après
-      
-      // Ajouter d'abord les champs dynamiques
-      formData.append('adultes_supplementaires', adults.length ? adults.join(", ") : "Aucun");
-      formData.append('enfants', children.length ? children.join(", ") : "Aucun");
-      
-      // Réinsérer diet après
-      formData.append('diet', dietValue);
-      
+       
       // Envoi via fetch compatible Web3Forms
       const resp = await fetch(form.action, {
         method: 'POST',
