@@ -203,7 +203,12 @@ function parseDateISO(iso) {
     let isValid = true;
 
     // Vérification champs obligatoires
-    if (!form.name.value.trim() || !form.email.value.trim() || !form.phone.value.trim() || !form.attendance.value.trim()) {
+    const name = form.querySelector('[name="name"]').value.trim();
+    const email = form.querySelector('[name="email"]').value.trim();
+    const phone = form.querySelector('[name="phone"]').value.trim();
+    const attendance = form.querySelector('[name="attendance"]').value.trim();
+
+    if (!name || !email || !phone || !attendance) {
       isValid = false;
     }
 
@@ -235,7 +240,7 @@ function parseDateISO(iso) {
       // Construction du FormData pour Web3Forms
       const formData = new FormData(form);
 
-     // Champs dynamiques : adultes
+      // Champs dynamiques : adultes
       const adultInputs = form.querySelectorAll('input[name="adult_guest[]"]');
       const adults = Array.from(adultInputs).map(i => i.value.trim()).filter(v => v);
       formData.set('adultes_supplementaires', adults.length ? adults.join(", ") : "Aucun");
@@ -253,17 +258,21 @@ function parseDateISO(iso) {
       formData.delete('adult_guest[]');
       formData.delete('child_guest_name[]');
       formData.delete('child_guest_age[]');
-       
+
+      // Debug : voir ce qui part
+      // for (let pair of formData.entries()) console.log(pair[0], pair[1]);
+
       // Envoi via fetch compatible Web3Forms
       const resp = await fetch(form.action, {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: { 'Accept': 'application/json' } // Web3Forms attend du JSON en retour
       });
 
       if (!resp.ok) throw new Error('Erreur serveur');
 
       const json = await resp.json();
-      if (json && (json.success || json.success === true)) {
+      if (json && json.success) {
         statusEl.style.color = 'green';
         statusEl.textContent = 'Merci — votre réponse a bien été envoyée.';
         form.reset();
