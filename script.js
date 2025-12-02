@@ -249,6 +249,11 @@ function parseDateISO(iso) {
       });
       formData.set('enfants', children.length ? children.join(", ") : "Aucun");
 
+      // SUPPRESSION DES CHAMPS BRUTS QUI POLLUENT L’EMAIL
+      formData.delete('adult_guest[]');
+      formData.delete('child_guest_name[]');
+      formData.delete('child_guest_age[]');
+      
       // Envoi via fetch compatible Web3Forms
       const resp = await fetch(form.action, {
         method: 'POST',
